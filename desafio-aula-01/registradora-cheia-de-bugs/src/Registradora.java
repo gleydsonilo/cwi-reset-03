@@ -23,10 +23,12 @@ public class Registradora {
                 if (!DataProjeto.cozinhaEmFuncionamento()) {
                     System.out.println("Cozinha fechada!");
                 }
+                if(ItensPorQuantidade.pao < 600 || ItensPorQuantidade.torta < 12)
                 ReposicaoCozinha.reporItem(item);
             }
 
             if ("leite".equals(item) || "cafe".equals(item)) {
+                if(ItensPorQuantidade.leite < 12 || ItensPorQuantidade.cafe < 12)
                 ReposicaoFornecedor.reporItem(item);
             }
         }
