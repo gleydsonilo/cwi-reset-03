@@ -31,6 +31,10 @@ public class Registradora {
                         if(estoqueAtual == 0){
                             System.out.println("Impossível concluir a transação, produto em falta!");
                             precoItem = RelacaoPesoPreco.retornaPrecoProduto(item, estoqueAtual);
+                        } else if (quantidade > estoqueAtual){
+                            System.out.println("Não temos " + quantidade + " " + item + "!");
+                            System.out.println("Será registrado apenas " + estoqueAtual + " " + item + "!");
+                            precoItem = RelacaoPesoPreco.retornaPrecoProduto(item, estoqueAtual);
                         }
 
                 } else if (ItensPorQuantidade.pao < 600 || ItensPorQuantidade.sanduiche <= 1 || ItensPorQuantidade.torta < 12) {
@@ -47,7 +51,6 @@ public class Registradora {
                     System.out.println("Reposição de item: " + item.toUpperCase());
             }
         }
-
         return precoItem;
     }
 
@@ -114,7 +117,7 @@ public class Registradora {
         DataProjeto.criarDataComCozinhaEncerradaSemDiaUtil();
         // Cliente 1
         String item = "sanduiche";
-        int quantidade = 20;
+        int quantidade = 19;
         double precoTotal = registrarItem(item, quantidade);
 
         System.out.println(String.format("Valor total: %.2f", precoTotal));
