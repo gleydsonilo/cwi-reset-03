@@ -28,8 +28,13 @@ public class Registradora {
                     System.out.println("Cozinha fechada!");
                     System.out.println("A reposição do(a) " + item.toUpperCase() + " não está disponível!");
                     System.out.println("Quantidade disponível em estoque: " + estoqueAtual);
+                        if(estoqueAtual == 0){
+                            System.out.println("Impossível concluir a transação, produto em falta!");
+                            precoItem = RelacaoPesoPreco.retornaPrecoProduto(item, estoqueAtual);
+                        }
 
                 } else if (ItensPorQuantidade.pao < 600 || ItensPorQuantidade.sanduiche <= 1 || ItensPorQuantidade.torta < 12) {
+                    System.out.println("Cozinha em funcionamento!");
                     ReposicaoCozinha.reporItem(item);
                     System.out.println("Reposição de item: " + item.toUpperCase());
                 }
@@ -37,6 +42,7 @@ public class Registradora {
 
             if ("leite".equals(item) || "cafe".equals(item)) {
                 if (ItensPorQuantidade.leite < 12 || ItensPorQuantidade.cafe < 12)
+                    System.out.println("Cozinha em funcionamento!");
                     ReposicaoFornecedor.reporItem(item);
                     System.out.println("Reposição de item: " + item.toUpperCase());
             }
