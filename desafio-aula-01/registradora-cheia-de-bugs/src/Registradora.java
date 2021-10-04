@@ -1,3 +1,4 @@
+import java.util.Locale;
 
 public class Registradora {
 
@@ -18,18 +19,34 @@ public class Registradora {
     private static double registrarItem(String item, int quantidade) {
         double precoItem = RelacaoPesoPreco.retornaPrecoProduto(item, quantidade);
 
+        ControlarEstoque.reduzItemEstoque(item, quantidade);
+
         if (QuantidadeMinimaItem.precisaReposicao(item)) {
             if ("pao".equals(item) || "sanduiche".equals(item) || "torta".equals(item)) {
                 if (!DataProjeto.cozinhaEmFuncionamento()) {
                     System.out.println("Cozinha fechada!");
+                    System.out.println("A reposição do(a) " + item.toUpperCase() + " não está disponível!");
+                    System.out.print("Quantidade disponível em estoque: ");
+
+                    if ("pao".equals(item)) {
+                        System.out.println(ItensPorQuantidade.pao);
+                    } else if ("sanduiche".equals(item)) {
+                        System.out.println(ItensPorQuantidade.sanduiche);
+                    } else {
+                        System.out.println(ItensPorQuantidade.torta);
+                    }
+
+
+                } else if (ItensPorQuantidade.pao < 600 || ItensPorQuantidade.sanduiche <= 1 || ItensPorQuantidade.torta < 12) {
+                    ReposicaoCozinha.reporItem(item);
+                    System.out.println("Reposição de item: " + item.toUpperCase());
                 }
-                if(ItensPorQuantidade.pao < 600 || ItensPorQuantidade.torta < 12)
-                ReposicaoCozinha.reporItem(item);
             }
 
             if ("leite".equals(item) || "cafe".equals(item)) {
-                if(ItensPorQuantidade.leite < 12 || ItensPorQuantidade.cafe < 12)
-                ReposicaoFornecedor.reporItem(item);
+                if (ItensPorQuantidade.leite < 12 || ItensPorQuantidade.cafe < 12)
+                    ReposicaoFornecedor.reporItem(item);
+                    System.out.println("Reposição de item: " + item.toUpperCase());
             }
         }
 
@@ -100,7 +117,6 @@ public class Registradora {
         // Cliente 1
         String item = "sanduiche";
         int quantidade = 20;
-
         double precoTotal = registrarItem(item, quantidade);
 
         System.out.println(String.format("Valor total: %.2f", precoTotal));
@@ -108,7 +124,6 @@ public class Registradora {
         // Cliente 2
         String item2 = "sanduiche";
         int quantidade2 = 5;
-
         double precoTotal2 = registrarItem(item2, quantidade2);
 
         System.out.println(String.format("Valor total: %.2f", precoTotal2));
