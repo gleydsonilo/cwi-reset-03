@@ -49,19 +49,22 @@ public class ControlarEstoque {
         }
     }
 
-    public static boolean verificaEstoque(String item) {
-        if ("pao".equals(item)) {
-            return ItensPorQuantidade.pao < 60;
-        }
+    public static int verificaEstoque(String item) {
+        int estoque = 0;
 
+        if ("pao".equals(item)) {
+            estoque = ItensPorQuantidade.pao;
+            return estoque;
+        }
         if ("torta".equals(item)) {
-            return ItensPorQuantidade.torta < 1;
+            estoque = ItensPorQuantidade.torta;
+            return estoque;
         }
 
         if ("sanduiche".equals(item)) {
-            return ItensPorQuantidade.sanduiche < 1;
+            estoque = ItensPorQuantidade.sanduiche;
+            return estoque;
         }
-
-        return false;
+        return estoque;
     }
 }

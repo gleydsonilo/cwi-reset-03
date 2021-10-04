@@ -18,6 +18,7 @@ public class Registradora {
 
     private static double registrarItem(String item, int quantidade) {
         double precoItem = RelacaoPesoPreco.retornaPrecoProduto(item, quantidade);
+        int estoqueAtual = ControlarEstoque.verificaEstoque(item);
 
         ControlarEstoque.reduzItemEstoque(item, quantidade);
 
@@ -26,16 +27,7 @@ public class Registradora {
                 if (!DataProjeto.cozinhaEmFuncionamento()) {
                     System.out.println("Cozinha fechada!");
                     System.out.println("A reposição do(a) " + item.toUpperCase() + " não está disponível!");
-                    System.out.print("Quantidade disponível em estoque: ");
-
-                    if ("pao".equals(item)) {
-                        System.out.println(ItensPorQuantidade.pao);
-                    } else if ("sanduiche".equals(item)) {
-                        System.out.println(ItensPorQuantidade.sanduiche);
-                    } else {
-                        System.out.println(ItensPorQuantidade.torta);
-                    }
-
+                    System.out.println("Quantidade disponível em estoque: " + estoqueAtual);
 
                 } else if (ItensPorQuantidade.pao < 600 || ItensPorQuantidade.sanduiche <= 1 || ItensPorQuantidade.torta < 12) {
                     ReposicaoCozinha.reporItem(item);
