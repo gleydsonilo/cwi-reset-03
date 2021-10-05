@@ -13,7 +13,7 @@ public class Registradora {
 //
 //        quintoBug();
 //
-//        sextoBug();
+        sextoBug();
     }
 
     private static double registrarItem(String item, int quantidade) {
@@ -117,7 +117,7 @@ public class Registradora {
         DataProjeto.criarDataComCozinhaEncerradaSemDiaUtil();
         // Cliente 1
         String item = "sanduiche";
-        int quantidade = 19;
+        int quantidade = 20;
         double precoTotal = registrarItem(item, quantidade);
 
         System.out.println(String.format("Valor total: %.2f", precoTotal));
