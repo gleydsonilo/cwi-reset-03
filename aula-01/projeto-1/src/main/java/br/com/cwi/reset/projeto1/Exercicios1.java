@@ -42,9 +42,18 @@ public class Exercicios1 {
     }
 
     public List<Integer> ordenarLista(List<Integer> numeros) {
-
-
-        return Arrays.asList();
+        Integer[] listaOrdenada = numeros.toArray(new Integer[0]);
+        Integer aux;
+        for (int i = 0; i < numeros.size()-1; ++i){
+            for (int j = 0; j < numeros.size()-i-1; ++j){
+                if (listaOrdenada[j+1] < listaOrdenada[j]){
+                    aux = listaOrdenada[j];
+                    listaOrdenada[j] = listaOrdenada[j+1];
+                    listaOrdenada[j+1] = aux;
+                }
+            }
+        }
+        return Arrays.asList(listaOrdenada);
     }
 }
 
